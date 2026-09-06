@@ -12,6 +12,7 @@ For a comprehensive task index, see the [Cheatsheet](/docs/cheatsheet).
 
 ## Table of contents
 
+- [Quick start](#quick-start)
 - [First-time: AWS and GitHub CI](#first-time-aws-and-github-ci)
   - [1. AWS credentials](#1-aws-credentials)
   - [2. CDK toolkit bootstrap](#2-cdk-toolkit-bootstrap)
@@ -27,6 +28,24 @@ For a comprehensive task index, see the [Cheatsheet](/docs/cheatsheet).
 - [Local metrics](#local-metrics)
 
 ---
+
+## Quick start
+
+To get started, minus the explanatory commentary in further reading below, issue the following commands:
+
+```bash
+# AWS CDK toolkit (once per account)
+task aws:bootstrap
+
+# GitHub Actions OIDC role (once per account)
+BACKBONE_STAGE_ENV=INT task cdk:synth
+BACKBONE_STAGE_ENV=INT task aws:deploy-github-role
+
+# GitHub Actions vars/secrets
+task bootstrap:github-licence
+task bootstrap:github-env
+task bootstrap:github-ci
+```
 
 ## First-time: AWS and GitHub CI
 
