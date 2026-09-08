@@ -193,14 +193,19 @@ task build:clean build:nuke build:install
 ### 1. Floci
 
 1. notification-service:      ➜ `awslocal ses verify-email-identity --email hello@backbonehq.io` · inspect mail: `curl http://localhost:4566/_aws/ses`
-2. actor-service:             ➜ `docker exec -it postgres psql -U postgres -d backbone -c "SELECT * FROM actor.actors;"`
-3. document-service:          ➜ `awslocal dynamodb describe-table --table-name DOCUMENTS 2>&1 | grep -A 10 "KeySchema"`
-4. authenticate Docker to ECR ➜
+2. document-service:          ➜ `awslocal dynamodb describe-table --table-name DOCUMENTS 2>&1 | grep -A 10 "KeySchema"`
+3. authenticate Docker to ECR ➜
 
 ```bash
 aws ecr get-login-password --region "$AWS_REGION" \
 | docker login --username AWS --password-stdin "$(echo $ECR_URI | cut -d/ -f1)"
 ```
+
+1. actor-service:             ➜ `docker exec -it postgres psql -U postgres -d backbone -c "DELETE * FROM actor.actors;"`
+                              ➜ `POOL_ID=$(awslocal ssm get-parameter --name COGNITO_ACTOR_POOL_ID --query Parameter.Value --output text)`
+                              ➜ `awslocal cognito-idp admin-delete-user \
+                                    --user-pool-id "$POOL_ID" \
+                                    --username 'any@example.com'`
 
 ---
 
