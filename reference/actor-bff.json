@@ -1019,7 +1019,7 @@
   },
   "info" : {
     "title" : "Actor BFF API",
-    "version" : "2.0.13",
+    "version" : "2.0.17",
     "description" : "Browser-facing Backbone API for authentication, actors, documents, and notification preferences."
   }
 }
