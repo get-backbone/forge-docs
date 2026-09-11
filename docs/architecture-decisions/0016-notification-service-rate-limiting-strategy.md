@@ -15,7 +15,7 @@ The Notification Service sends notifications to external providers (AWS SES, Twi
 - **Twilio SMS:** Account-specific limits (varies by account tier)
 - **Future Providers:** Each will have their own constraints
 
-The existing `libs/security` rate limiting framework (`RateLimitingFilter`) is designed for **incoming HTTP request** rate limiting (per-user, per-service, per-IP). This is fundamentally different from what the notification service needs: **outgoing notification rate limiting** to external providers with provider-specific constraints.
+The existing `libs/security` rate limiting framework (`RateLimitRequestFilter`) is designed for **incoming HTTP request** rate limiting (per-user, per-service, per-IP). This is fundamentally different from what the notification service needs: **outgoing notification rate limiting** to external providers with provider-specific constraints.
 
 **Requirements:**
 - Respect provider-specific API limits (SES, Twilio, etc.)
